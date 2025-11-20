@@ -2,6 +2,24 @@
 Условие. В графе найти максимальное по размеру независимое множество вершин (никакие
 две не смежны).
 Алгоритм: жадный выбор вершины минимальной степени.
+Язык примера: Java
+public static Set<Integer> maxIndependentSet(int[][] adjMatrix) {
+ int n = adjMatrix.length;
+ boolean[] deleted = new boolean[n];
+ Set<Integer> result = new HashSet<>();
+ while (true) {
+ int v = -1;
+ // ДОПИСАТЬ: найти вершину с минимальной степенью среди не удалённой
+ if (v == -1) break;
+ result.add(v); // Удалить v и всех её соседей
+ deleted[v] = true;
+ for (int u = 0; u < n; u++) {
+ if (adjMatrix[v][u] == 1) deleted[u] = true;
+ }
+ }
+ return result;
+}
+Что дописать: цикл по вершинам для поиска v с минимумом соседей.
 
 2. Описание алгоритма:
 Шаг 1: Инициализация структур — n = число вершин, deleted[0..n-1]=false, result=∅; работаем до тех пор, пока найдётся не удалённая вершина.​
